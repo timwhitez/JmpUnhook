@@ -45,8 +45,8 @@ func JmpUnhook(ptr uintptr,funcN string)(uintptr,uintptr,error){
 	}
 
 	//构造unhook函数
-	for i := 0;i < len(buff);i++{
-		if buff[i] == *(*byte)(unsafe.Pointer(memPtr+uintptr(i))){
+	for i := 0;i < len(buff)-2;i++{
+		if buff[i] == *(*byte)(unsafe.Pointer(memPtr+uintptr(i))) && buff[i+1] == *(*byte)(unsafe.Pointer(memPtr+uintptr(i+1))){
 			addr := memPtr+uintptr(i)
 			jmpAddr := uintptrToBytes(&addr)
 
